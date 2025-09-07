@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smart Health Monitor — Dashboard</title>
+
+  <!-- Favicon & Logo (put your logo at /assets/logo.png) -->
+  <link rel="icon" href="assets/logo.png" />
+  <link rel="stylesheet" href="dashboard.css" />
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+
+  <!-- Google Charts -->
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+  <!-- Top Bar -->
+  <header class="topbar">
+    <div class="brand">
+      <img src="assets/logo.png" alt="Smart Health Monitor logo" class="logo" />
+      <span>Smart Health Monitor</span>
+    </div>
+    <nav class="nav">
+      <a href="../index.html">Home</a>
+      <a href="../solution.html">Solution</a>
+      <a href="../impact.html">Impact</a>
+      <a class="active" href="./dashboard.html">Dashboard</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1 class="page-title">Dashboard</h1>
+
+    <!-- Tabs -->
+    <div class="tabs" role="tablist" aria-label="Dashboard Sections">
+      <button class="tab active" data-tab="charts" role="tab" aria-selected="true">📈 Charts</button>
+      <button class="tab" data-tab="alerts" role="tab" aria-selected="false">🚨 Alerts</button>
+      <button class="tab" data-tab="data" role="tab" aria-selected="false">📝 Data Entry</button>
+    </div>
+
+    <!-- Tab Panels -->
+    <section id="tab-charts" class="tab-panel active" role="tabpanel" aria-labelledby="charts">
+      <div class="grid">
+        <div class="card">
+          <h3>pH Levels (Last 24h)</h3>
+          <div id="phLineChart" class="chart"></div>
+        </div>
+        <div class="card">
+          <h3>Turbidity (NTU)</h3>
+          <div id="turbidityBarChart" class="chart"></div>
+        </div>
+        <div class="card">
+          <h3>Chlorine Residual (mg/L)</h3>
+          <div id="chlorineLineChart" class="chart"></div>
+        </div>
+        <div class="card">
+          <h3>Disease Risk Score</h3>
+          <div id="riskPieChart" class="chart"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-alerts" class="tab-panel" role="tabpanel" aria-labelledby="alerts">
+      <div class="card">
+        <div class="alerts-header">
+          <h3>Recent Alerts (Demo)</h3>
+          <button id="injectAlertDemo" class="btn">Add Demo Alert</button>
+        </div>
+        <ul id="alertsList" class="alerts"></ul>
+      </div>
+    </section>
+
+    <section id="tab-data" class="tab-panel" role="tabpanel" aria-labelledby="data">
+      <div class="grid-2">
+        <!-- Form -->
+        <div class="card">
+          <h3>Health Data Entry</h3>
+          <form id="entryForm" novalidate>
+            <label>
+              Family Member Name
+              <input type="text" name="name" id="name" required placeholder="e.g., Ramesh Kumar" />
+            </label>
+            <label>
+              Symptoms
+              <input type="text" name="symptoms" id="symptoms" required placeholder="e.g., fever, vomiting" />
+            </label>
+            <label>
+              Water Condition
+              <select name="water" id="water" required>
+                <option value="">Select condition</option>
+                <option>Clean</option>
+                <option>Slightly Cloudy</option>
+                <option>Dirty</option>
+                <option>Unknown</option>
+              </select>
+            </label>
+
+            <div class="actions">
+              <button type="submit" class="btn primary">Save Data</button>
+              <span id="formStatus" class="muted" role="status"></span>
+            </div>
+          </form>
+        </div>
+
+        <!-- Table -->
+        <div class="card">
+          <div class="table-header">
+            <h3>Entries (Local)</h3>
+            <div class="table-controls">
+              <input id="search" class="search" placeholder="Search name/symptom…" />
+              <button id="clearAll" class="btn danger" title="Clear all saved entries">Clear All</button>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table id="entriesTable">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Symptoms</th>
+                  <th>Water</th>
+                  <th>Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody><!-- filled by JS --></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © <span id="year"></span> Smart Health Monitor
+  </footer>
+
+  <script defer src="dashboard.js"></script>
+</body>
+</html>
